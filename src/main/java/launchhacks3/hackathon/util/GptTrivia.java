@@ -56,28 +56,28 @@ public class GptTrivia {
 
 		var response_ = """
 				<200 OK OK,{
-				  "id": "chatcmpl-99NunUgnf4iQA4nQsRrxRT0QHq0gk",
-				  "object": "chat.completion",
-				  "created": 1712023909,
-				  "model": "gpt-3.5-turbo-0125",
-				  "choices": [
-				    {
-				      "index": 0,
-				      "message": {
-				        "role": "assistant",
-				        "content": "{\\n  \\"question\\": \\"Which of the following countries was NOT part of the British Empire during World War II?\\",\\n  \\"choices\\": [\\"India\\", \\"Canada\\", \\"Australia\\", \\"Italy\\"]\\n}"
-				      },
-				      "logprobs": null,
-				      "finish_reason": "stop"
-				    }
-				  ],
-				  "usage": {
-				    "prompt_tokens": 45,
-				    "completion_tokens": 40,
-				    "total_tokens": 85
-				  },
-				  "system_fingerprint": "fp_b28b39ffa8"
-				}
+				   "id": "chatcmpl-99OQ5TerTBHRs5YoKXjFCI1J0cJwM",
+				   "object": "chat.completion",
+				   "created": 1712025849,
+				   "model": "gpt-3.5-turbo-0125",
+				   "choices": [
+				     {
+				       "index": 0,
+				       "message": {
+				         "role": "assistant",
+				         "content": "{\\n\\"question\\": \\"In which Italian city can you find the famous architectural marvel, the Leaning Tower of Pisa?\\",\\n\\"choices\\": [\\"Florence\\", \\"Rome\\", \\"Venice\\", \\"Pisa\\"],\\n\\"correct\\": \\"Pisa\\"\\n}"
+				       },
+				       "logprobs": null,
+				       "finish_reason": "stop"
+				     }
+				   ],
+				   "usage": {
+				     "prompt_tokens": 86,
+				     "completion_tokens": 52,
+				     "total_tokens": 138
+				   },
+				   "system_fingerprint": "fp_b28b39ffa8"
+				 }
 				""";
 
 		System.out.println(response);
