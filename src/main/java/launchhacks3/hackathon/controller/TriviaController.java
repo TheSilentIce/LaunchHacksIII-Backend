@@ -28,6 +28,14 @@ public class TriviaController {
 	public List<TriviaQuestion> getNewQuestions(@PathVariable int amount) {
 		return service.getNewQuestions(amount);
 	}
+
+	@PostMapping("/addUser/{user}")
+	public void addUser(@PathVariable String user) {
+		String[] data = user.split("&");
+
+		service.addUser(data[0], Integer.parseInt(data[1]));
+	}
+
 	@GetMapping("/leaderboard/all")
 	public List<User> getLeaderboard() {
 		return service.getLeaderboard();
@@ -37,4 +45,6 @@ public class TriviaController {
 	public void updateLeaderboard(@PathVariable String username, @PathVariable int score) {
 		service.updateLeaderboard(username, score);
 	}
+
+
 }

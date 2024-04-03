@@ -40,6 +40,11 @@ public class TriviaService {
 	@Autowired private UserRepository userRepository;
 	@Autowired private MongoTemplate mongoTemplate;
 
+	public void addUser(String username, int score) {
+		User user = new User(username,score);
+		userRepository.save(user);
+	}
+
 	public List<User> getLeaderboard() {
 		return userRepository.findAllByOrderByScoreDesc();
 	}
