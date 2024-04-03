@@ -23,7 +23,7 @@ public class TriviaService {
 	private static final String MCQ_FORMAT = "You MUST use JSON FORMAT. Do not include option letters/numbers, ONLY the VALUES. \n example: {\"question\": \"1+1?\", \"choices\": [\"2\", \"9\", \"3\"], \"correct\": \"2\"}";
 
 	private static final String INSTRUCTIONS_LOCATION = "Your role is to generate a trivia question to test someone's knowledge of geography.";
-	private static final String MAP_FORMAT = "You MUST use JSON FORMAT. Do NOT include OPTIONS, only the question and correct answer. The correct answer should be a location. \n example: {\"question\": \"where is the capital of India?\", \"correct\": \"New Delhi\"}";
+	private static final String MAP_FORMAT = "You MUST use JSON FORMAT. Do NOT include OPTIONS, only the question and correct answer. The correct answer should only be a city. Be sure to also use cities who are not necessarily well known. \n example: {\"question\": \"where is the capital of India?\", \"correct\": \"New Delhi\"}";
 
 	private static final String INSTRUCTIONS_QUESTIONS = "Your role is to generate geography related trivia questions.";
 	private static final String QUESTIONS_FORMAT = "You MUST use JSON FORMAT. Generate the number of questions the user requests. Only include \"question\", \"choices\", and \"correct\" fields";
