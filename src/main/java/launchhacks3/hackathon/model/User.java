@@ -14,11 +14,14 @@ public class User {
 	@Id
 	private String id;
 	private String username;
+	private String password;
 	private Integer score;
 
-	public User (String username, int score) {
+
+	public User (String username, String password, int score) {
 		this.username = username;
 		this.score = score;
+		this.password = password;
 
 		this.id = String.valueOf(new ObjectId());
 	}

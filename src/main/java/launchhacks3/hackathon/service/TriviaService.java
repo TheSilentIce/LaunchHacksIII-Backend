@@ -40,9 +40,13 @@ public class TriviaService {
 	@Autowired private UserRepository userRepository;
 	@Autowired private MongoTemplate mongoTemplate;
 
-	public void addUser(String username, int score) {
-		User user = new User(username,score);
+	public void addUser(String username, String password, int score) {
+		User user = new User(username,password, score);
 		userRepository.save(user);
+	}
+
+	public User getUser(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 	public List<User> getLeaderboard() {
@@ -55,7 +59,8 @@ public class TriviaService {
 		if (user != null) {
 			userRepository.delete(user);
 		} else {
-			user = new User(username, score);
+			user.setScore(score);
+//			user = new User(username, score);
 		}
 
 		user.setScore(score);

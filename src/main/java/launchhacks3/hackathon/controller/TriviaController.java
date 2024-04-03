@@ -33,7 +33,12 @@ public class TriviaController {
 	public void addUser(@PathVariable String user) {
 		String[] data = user.split("&");
 
-		service.addUser(data[0], Integer.parseInt(data[1]));
+		service.addUser(data[0], data[1], Integer.parseInt(data[2]));
+	}
+
+	@PostMapping("/getUser/{username}")
+	public User getUser(@PathVariable String username) {
+		return service.getUser(username);
 	}
 
 	@GetMapping("/leaderboard/all")
