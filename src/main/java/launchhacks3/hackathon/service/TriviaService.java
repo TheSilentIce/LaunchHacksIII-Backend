@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import launchhacks3.hackathon.model.TriviaQuestion;
+import launchhacks3.hackathon.model.User;
 import launchhacks3.hackathon.repository.TriviaRepository;
+import launchhacks3.hackathon.repository.UserRepository;
 import launchhacks3.hackathon.util.GptClient;
 import launchhacks3.hackathon.util.GptUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +36,27 @@ public class TriviaService {
 	@Value("${openai.api.uri}")
 	private String apiUri;
 
-	@Autowired private TriviaRepository repository;
+	@Autowired private TriviaRepository triviaRepository;
+	@Autowired private UserRepository userRepository;
 	@Autowired private MongoTemplate mongoTemplate;
+
+	public List<User> getLeaderboard() {
+		return userRepository.findAllByOrderByScoreDesc();
+	}
+
+	public void updateLeaderboard(String username, int score) {
+		var user = userRepository.findByUsername(username);
+
+		if (user != null) {
+			userRepository.delete(user);
+		} else {
+			user = new User(username, score);
+		}
+
+		user.setScore(score);
+
+		userRepository.save(user);
+	}
 
 	public TriviaQuestion getTriviaMultipleChoiceQuestion(String query) {
 		var gptClient = new GptClient(apiKey, apiUri, GptUtils.JSON_FORMAT, GPT_MODEL);
@@ -53,7 +74,7 @@ public class TriviaService {
 			question = mapper.readValue(gptMessage, TriviaQuestion.class);
 		} catch (JsonProcessingException ignored) {}
 
-		return repository.save(question);
+		return triviaRepository.save(question);
 	}
 
 	public TriviaQuestion getTriviaMapQuestion(String query) {
@@ -72,7 +93,7 @@ public class TriviaService {
 			question = mapper.readValue(gptMessage, TriviaQuestion.class);
 		} catch (JsonProcessingException ignored) {}
 
-		return repository.save(question);
+		return triviaRepository.save(question);
 	}
 
 	public List<TriviaQuestion> getNewQuestions(int amount) {
@@ -109,7 +130,7 @@ public class TriviaService {
 			for (var node : questionsNode) {
 				var question = mapper.readValue(node.toString(), TriviaQuestion.class);
 				questions.add(question);
-				repository.save(question);
+				triviaRepository.save(question);
 			}
 
 		} catch (Exception e) {

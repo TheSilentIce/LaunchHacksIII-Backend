@@ -1,11 +1,25 @@
 package launchhacks3.hackathon.model;
 
-public class User {
-	private String name;
-	private String password;
+import lombok.Getter;
+import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-	public User (String name, String password) {
-		this.name = name;
-		this.password = password; // TODO add salt
+@Document(collection = "leaderboard")
+
+@Getter
+@Setter
+public class User {
+	@Id
+	private String id;
+	private String username;
+	private Integer score;
+
+	public User (String username, int score) {
+		this.username = username;
+		this.score = score;
+
+		this.id = String.valueOf(new ObjectId());
 	}
 }
